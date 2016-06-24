@@ -65,6 +65,7 @@
     <Compile Include="Ioc\RequestHandlerFactory.cs" />
     <Compile Include="Ioc\SimpleInjectorInitializer.cs" />
     <Compile Include="Models\BankAccount.cs" />
+    <Compile Include="Models\Interfaces\IBankAccount.cs" />
     <Compile Include="Models\Transcation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

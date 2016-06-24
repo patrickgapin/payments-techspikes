@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using NEventStore.Common.Events.Interfaces;
 using NEventStore.Common.EventServices.Interfaces;
 using NEventStore.Common.Ioc.Interfaces;
+using NEventStore.Common.Models.Interfaces;
 
 namespace NEventStore.Common.Models
 {
-    public class BankAccount
+    public class BankAccount : IBankAccount
     {
         private readonly IRequestHandlerFactory _requestHandlerFactory;
         public BankAccount(IRequestHandlerFactory requestHandlerFactory)
@@ -25,6 +26,11 @@ namespace NEventStore.Common.Models
             _requestHandlerFactory
                 .CreateNew<IApplyService<BankAccount>>(@event.ServiceImplementationType)
                 .ApplyValues(this, @event);
+        }
+
+        public decimal GetCurrentBalance()
+        {
+            return CurrentBalance;
         }
     }
 }

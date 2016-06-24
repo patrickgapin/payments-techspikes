@@ -9,6 +9,6 @@ namespace NEventStore.Common.Events
     {
         public Guid ResourceId { get; set; }
         public decimal Amount { get; set; }
-        public SimpleInjectorInitializer.ImplementationType ServiceImplementationType => SimpleInjectorInitializer.ImplementationType.FundsDespoited;
+        public SimpleInjectorInitializerCommon.ImplementationType ServiceImplementationType => SimpleInjectorInitializerCommon.ImplementationType.FundsDespoited;
     }
 }

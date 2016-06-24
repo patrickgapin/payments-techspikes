@@ -71,6 +71,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\EventStoreWriteService.cs" />
+    <Compile Include="Services\Interfaces\IEventStoreWriteService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

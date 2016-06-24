@@ -7,8 +7,8 @@ namespace NEventStore.Common.Ioc
 {
     public class RequestHandlerFactory : IRequestHandlerFactory
     {
-        private readonly Dictionary<SimpleInjectorInitializer.ImplementationType, InstanceProducer> _producers =
-           new Dictionary<SimpleInjectorInitializer.ImplementationType, InstanceProducer>();
+        private readonly Dictionary<SimpleInjectorInitializerCommon.ImplementationType, InstanceProducer> _producers =
+           new Dictionary<SimpleInjectorInitializerCommon.ImplementationType, InstanceProducer>();
 
         private readonly Container _container;
 
@@ -17,7 +17,7 @@ namespace NEventStore.Common.Ioc
             _container = container;
         }
 
-        public TInterface CreateNew<TInterface>(SimpleInjectorInitializer.ImplementationType implementationType)
+        public TInterface CreateNew<TInterface>(SimpleInjectorInitializerCommon.ImplementationType implementationType)
         {
             if (!_producers.ContainsKey(implementationType))
                 throw new ArgumentException("Instance Name does not exist in dictionary.");
@@ -25,7 +25,7 @@ namespace NEventStore.Common.Ioc
             return (TInterface)_producers[implementationType].GetInstance();
         }
 
-        public void Register<TInterface, TImplementation>(SimpleInjectorInitializer.ImplementationType implementationType,
+        public void Register<TInterface, TImplementation>(SimpleInjectorInitializerCommon.ImplementationType implementationType,
                 Lifestyle lifestyle = null)
             where TImplementation : class, TInterface
             where TInterface : class

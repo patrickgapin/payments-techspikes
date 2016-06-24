@@ -10,6 +10,6 @@ namespace NEventStore.Common.Events
         public Guid ResourceId { get; set; }
         public string AccountName { get; set; }
 
-        public SimpleInjectorInitializer.ImplementationType ServiceImplementationType => SimpleInjectorInitializer.ImplementationType.AccountCreated;
+        public SimpleInjectorInitializerCommon.ImplementationType ServiceImplementationType => SimpleInjectorInitializerCommon.ImplementationType.AccountCreated;
     }
 }

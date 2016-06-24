@@ -7,6 +7,6 @@ namespace NEventStore.Common.Events.Interfaces
     public interface IEventBase
     {
         Guid ResourceId { get; set; }
-        SimpleInjectorInitializer.ImplementationType ServiceImplementationType { get; }
+        SimpleInjectorInitializerCommon.ImplementationType ServiceImplementationType { get; }
     }
 }
