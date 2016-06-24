@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEventStore.Write", "NEventStore.Write\NEventStore.Write.csproj", "{A7D877F1-3011-44EF-9D4C-1821C22744B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEventStore.Common", "NEventStore.Common\NEventStore.Common.csproj", "{E267236B-703C-449F-8293-270772A5400E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEventStore.Read", "NEventStore.Read\NEventStore.Read.csproj", "{B6CFAE1D-53A5-4673-BDFF-DFD7C49BEE94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7D877F1-3011-44EF-9D4C-1821C22744B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7D877F1-3011-44EF-9D4C-1821C22744B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7D877F1-3011-44EF-9D4C-1821C22744B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D877F1-3011-44EF-9D4C-1821C22744B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E267236B-703C-449F-8293-270772A5400E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E267236B-703C-449F-8293-270772A5400E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E267236B-703C-449F-8293-270772A5400E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E267236B-703C-449F-8293-270772A5400E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6CFAE1D-53A5-4673-BDFF-DFD7C49BEE94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6CFAE1D-53A5-4673-BDFF-DFD7C49BEE94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6CFAE1D-53A5-4673-BDFF-DFD7C49BEE94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6CFAE1D-53A5-4673-BDFF-DFD7C49BEE94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
