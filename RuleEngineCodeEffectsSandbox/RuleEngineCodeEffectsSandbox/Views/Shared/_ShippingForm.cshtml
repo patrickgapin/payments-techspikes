@@ -1,0 +1,41 @@
+﻿@model RuleEngineCodeEffectsSandbox.Models.ShippingModel
+    
+<div>
+    <div>
+        <div class="row">
+            <div>First Name:</div>
+            <div>@Html.TextBoxFor(m => m.Customer.FirstName)</div>
+            <div class="clear"></div>
+        </div>
+        <div class="row">
+            <div>Last Name:</div>
+            <div>@Html.TextBoxFor(m => m.Customer.LastName)</div>
+        </div>
+    </div>
+    <div>
+        <div class="row">
+            <div>Street:</div>
+            <div>@Html.TextBoxFor(m => m.Customer.Address.Street)</div>
+        </div>
+        <div class="row">
+            <div>City:</div>
+            <div>@Html.TextBoxFor(m => m.Customer.Address.City)</div>
+        </div>
+        <div class="row">
+            <div>Postal:</div>
+            <div>@Html.TextBoxFor(m => m.Customer.Address.PostalCode)</div>
+        </div>
+    </div>
+    <div>
+        <div class="row">
+            <div>Shipping Value:</div>
+            <div>@Html.TextBoxFor(m => m.ShippingValue)</div>
+        </div>
+        <div class="row">
+            @Html.CheckBoxFor(m => m.IsShippingFree)
+            <label>Is Shipping Free?</label>
+        </div>
+        <div style="text-align:right;margin-top:10px;"><input type="submit" id="Button" name="Button" value="Test" class="button" /></div>
+    </div>
+    <div class="clear"></div>
+</div>
