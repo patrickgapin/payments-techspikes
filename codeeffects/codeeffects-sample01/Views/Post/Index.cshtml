@@ -1,0 +1,48 @@
+﻿@using CodeEffects.Rule.Common
+@using CodeEffects.Rule.Mvc
+@{
+    ViewBag.Title = "Post Rules page";
+
+    Html.CodeEffects().Styles()
+        .SetTheme(ThemeType.Gray)
+        .Render();
+}
+
+<script type="text/javascript">
+    function getStatuses() {
+        // Statuses are hard-coded for the sake of this example.
+        // In a real app you would probably use xmHttpRequest (Ajax)
+        // to load that data on the client and return from this function
+        var statuses =
+		[
+			{ ID: 1, Name: "Success" },
+			{ ID: 2, Name: "Warning" },
+			{ ID: 3, Name: "Error" }
+		];
+
+        return statuses;
+    };
+
+</script>
+
+<br/>
+<div>
+
+    @{
+        Html.CodeEffects().RuleEditor()
+            .Id("ruleEditor")
+            .SaveAction("Save", "Post")
+            .DeleteAction("Delete", "Post")
+            .LoadAction("Load", "Post")
+            .Mode(RuleType.Execution)
+            .ContextMenuRules(ViewBag.ContextMenuRules)
+            .ToolBarRules(ViewBag.ToolBarRules)
+            .Rule(ViewBag.Rule)
+            .Render();
+    }
+
+    @{
+        Html.CodeEffects().Scripts().Render();
+    }
+
+</div>
