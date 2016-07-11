@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using CodeEffects.Rule.Core;
 using RuleEngineCodeEffectsSandbox.Models;
+using RuleEngineCodeEffectsSandbox.Models.Api;
 using RuleEngineCodeEffectsSandbox.Services;
 using RuleEngineCodeEffectsSandbox.Services.Interfaces;
 using WebGrease.Css.Extensions;
@@ -23,16 +24,17 @@ namespace RuleEngineCodeEffectsSandbox.ApiControllers
 
         public IHttpActionResult Post([FromBody]ShippingModel shippingModel)
         {
-            var rules = _ruleService.GetAllRules(true, typeof(ShippingModel));
+            var rules = _ruleService.GetAllRules(false, typeof(ShippingModel));
 
-            if(rules.Where(node => node.XmlRule.ParentNode != null)
-                    .Select(node => new Evaluator<ShippingModel>(node.XmlRule.ParentNode.OuterXml))
-                    .Any(evaluator => !evaluator.Evaluate(shippingModel)))
+            var isValid = rules.Where(node => node.XmlRule.ParentNode != null)
+                .Select(node => new Evaluator<ShippingModel>(node.XmlRule.ParentNode.OuterXml))
+                .Any(evaluator => evaluator.Evaluate(shippingModel));
+            
+            return Ok(new ShippingResponse<ShippingModel>
             {
-                return BadRequest("Failed Validation");
-            }
-
-            return Ok(shippingModel);
+                IsValid = isValid,
+                ResponseModel = shippingModel
+            });
         }
     }
 }

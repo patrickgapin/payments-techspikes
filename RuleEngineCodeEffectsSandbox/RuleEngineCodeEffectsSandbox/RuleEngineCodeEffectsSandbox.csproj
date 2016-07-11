@@ -161,6 +161,7 @@
     </Compile>
     <Compile Include="Ioc\SimpleInjectorInitializer.cs" />
     <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\Api\ShippingResponse.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\RuleEngine\RulesModel.cs" />
     <Compile Include="Models\ShippingModel.cs" />
@@ -182,7 +183,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Rules\Evaluation\aceed4a5-1f90-4518-a459-147214b1807f.config" />
+    <Content Include="Rules\Execution\9a5bbd3f-c76e-4e8b-b56f-9cae955afcf0.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

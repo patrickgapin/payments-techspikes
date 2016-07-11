@@ -36,9 +36,7 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
                 return View("Index", shippingModel);
             }
 
-            ClearState(typeof(ShippingModel), string.Empty);
-            ClearState(typeof(CustomerModel), string.Empty);
-            ClearState(typeof(AddressModel), string.Empty);
+            ModelState.Clear();
 
             var rule = ruleEditor.GetRuleXml();
             var evaluator = new Evaluator<ShippingModel>(rule, _ruleService.LoadRuleXml);
