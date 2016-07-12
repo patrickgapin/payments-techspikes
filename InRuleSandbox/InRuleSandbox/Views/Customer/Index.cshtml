@@ -1,0 +1,55 @@
+﻿@model InRuleSandbox.Models.RuleExecutionModel<InRuleSandbox.Models.Customer>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    textarea {
+        width: 500px;
+        height: 150px;
+    }
+</style>
+
+<h2>Customer Rule Test</h2>
+
+<div class="row">
+
+    @using (Html.BeginForm("Index", "Customer"))
+    {
+        <div class="editor-label">
+            @Html.Label("First Name:")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.EntityObject.FirstName, new { @class = "form-control" })
+        </div>
+        <div class="editor-label">
+            @Html.Label("Last Name:")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.EntityObject.LastName, new { @class = "form-control" })
+        </div>
+        <div class="editor-label">
+            @Html.Label("Address:")
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.EntityObject.Address, new { @class = "form-control" })
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Is Test Account: (will be set to true if address contains the word test)")
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.EntityObject.IsTestAccount, new { @class = "form-control", disabled = true })
+        </div>
+        
+        foreach (var message in Model.Response)
+        {
+            <div class="col-md-12">
+                @message
+            </div>
+        }
+        
+        <input type = "submit" value = "execute"/>
+    }
+</div>

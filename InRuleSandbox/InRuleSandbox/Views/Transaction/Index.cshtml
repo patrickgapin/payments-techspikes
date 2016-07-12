@@ -1,0 +1,59 @@
+﻿@model InRuleSandbox.Models.RuleExecutionModel<InRuleSandbox.Models.Transaction>
+
+@{
+    ViewBag.Title = "Transactions";
+}
+
+<h2>Transaction Rule Test</h2>
+
+<div class="row">
+
+    @using (Html.BeginForm("Index", "Transaction"))
+    {
+        <div class="editor-label">
+            @Html.Label("Customer Id:")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(m => m.EntityObject.CustomerId, new {@class = "form-control"})
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Credit Card:")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(m => m.EntityObject.CreditCardType, Model.EntityObject.CreditCardList, new { @class = "form-control" })
+        </div>
+
+        <div class="editor-label">
+           @Html.Label("Security Channel:")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(m => m.EntityObject.SecurityChannelType, Model.EntityObject.SecurityChannelList, new { @class = "form-control"})
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Credit Card Fee: (Setup as in decision table and value will depend on the input or Credit Card and Security Channel)") 
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(m => m.EntityObject.CreditCardFee, new {@class = "form-control", disabled = true })
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Should Process: (External API call from Rule Engine - Is set based on CustomerId - Less than 10 is true)")
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.EntityObject.ShouldProcess, new { @class = "form-control", disabled = true })
+        </div>
+
+        foreach (var message in Model.Response)
+        {
+            <div class="col-md-12">
+                @message
+            </div>
+        }
+
+        <br/>
+        <input type="submit" value="execute" />
+    }
+
+</div>
