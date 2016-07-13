@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html ng-app="binLookupApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    <title>Bin Lookup</title>
+
+    <link href="Content/app.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.min.css" rel="stylesheet"/>
+    <link href="http://kendo.cdn.telerik.com/2016.2.607/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://kendo.cdn.telerik.com/2016.2.607/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="http://kendo.cdn.telerik.com/2016.2.607/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" />
+</head>
+<body ng-cloak>
+<div class="mainheader">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header custom" style="margin-left: 40px">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
+            <a class="navbar-brand" href="#/binDetail">Bin Detail</a>
+        </div>
+        <div id="divAdmin" style="margin-left: 40px">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
+            <a class="navbar-brand" href="#/admin">Admin</a>
+        </div>
+    </div>
+</div>
+<br/>
+    <br/>
+    <div style="margin-left: 40px">
+        <ng-view></ng-view>
+    </div>
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+    <script src="Scripts/angular-route.min.js"></script>
+
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-aria.min.js"></script>
+    <script src="Scripts/angular-messages.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2016.2.607/js/kendo.all.min.js"></script>
+
+
+    <script src="AngularJs/App/App.js"></script>
+    <script src="AngularJs/App/Controllers/BinDetailController.js"></script>
+    <script src="AngularJs/App/Controllers/AdminController.js"></script>
+    <script src="AngularJs/App/Controllers/SpecificBinController.js"></script>
+
+    <script src="AngularJs/App/Services/BinDetailService.js"></script>
+    <script src="AngularJs/App/Services/AdminService.js"></script>
+    <script src="AngularJs/App/Services/WindowsAuthUserService.js"></script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+﻿[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+/****** Monitor Page Layout - Header, Content**********/
+.mainheader {
+    margin: 20px 20px 20px 20px;
+}
+
+.mainfooter {
+    text-align: center;
+}
+
+div.left {
+    float: left;
+}
+
+div.main.header {
+    margin: 20px 20px 20px 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid lightgray;
+}
+
+div.main {
+    margin: 20px 20px 20px 20px;
+}
+
+footer.main {
+    margin: 20px 20px 20px 20px;
+    border-top: 1px solid lightgrey;
+}
+
+h1 {
+    color: #4A59B3 !important;
+}
+
+.headeralign {
+    display: inline;
+    width: 70px;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.col-sm-4.header-left {
+    padding-left: 0;
+}
+
+.col-sm-2.header-left {
+    padding-left: 0;
+}
+
+.col-sm-2.header-right {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn-default {
+    margin: 5px;
+    min-width: 50px;
+}
+
+.container-fluid {
+    padding-left: 0 !important;
+}
+
+    .container-fluid.smarttable {
+        padding-left: 15px !important;
+    }
+
+.divspacetop {
+    padding-top: 10px;
+}
+
+.divspacebottom {
+    padding-bottom: 10px;
+}
+
+/******************************************************/
+
+/************** Form Elements - Content ***************/
+
+.headerbutton {
+    position: absolute;
+    margin-left: 270px;
+    margin-top: -40px;
+}
+
+.btn-primary.monitorBtn {
+    background: #CEA956;
+    border-color: #D6CEBD #AF8120 #AF8120 #D6CEBD;
+    border-style: solid;
+    border-width: 2px;
+}
+
+legend.monitor {
+    border: none;
+    color: #87CEEB;
+    font-weight: bold;
+    margin: 0px;
+    width: auto;
+    padding: 0px;
+}
+
+div.container-fluid fieldset {
+    float: left;
+    border: 1px solid #D4D0C8;
+    width: 100%;
+    padding: 5px 5px 25px 5px;
+    margin: 0 5px 0 0;
+    font-size: .9em;
+}
+
+.smarttableheader {
+    background: #E0FFFF;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.selectedRow {
+    background-color: #FAE0BF !important;
+}
+
+.takenRow {
+    background-color: #CBE2FD !important;
+}
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: .65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+img.gridItem {
+    cursor: pointer;
+}
+
+div.waiting {
+    cursor: wait;
+}
+
+/******************************************************/
+
+/******************* Smart Table **********************/
+
+.st-sort-ascent:before {
+    content: '\25B2';
+}
+
+.st-sort-descent:before {
+    content: '\25BC';
+}
+
+/******************************************************/
+
+/******************* ngDialog Table **********************/
+
+.ngdialog.ngdialog-theme-default .noResize {
+    resize: none !important;
+}
+
+.ngdialog.ngdialog-theme-default .custom-header {
+    margin: 15px 0 15px 0;
+}
+
+.ngdialog.ngdialog-theme-default .custom-content {
+    margin: 15px 0 5px 0;
+}
+
+/******************************************************/
+
+/****************** Bootstrap Select ******************/
+
+.form-control.header {
+    width: 125px;
+    display: inline;
+    margin-top: 5px;
+    background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+}
+
+/******************************************************/
+
+/****************** Bootstrap Navbar ******************/
+
+.navbar-custom {
+    background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+    border-radius: 0;
+}
+
+    .navbar-custom .navbar-nav > li > a {
+        color: #fff;
+    }
+
+    .navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+        color: #ffffff;
+        background-color: transparent;
+    }
+
+    .navbar-custom .navbar-brand {
+        color: #4A59B3;
+        font-weight: bold;
+    }
+
+.navbar .divider-vertical {
+    height: 50px;
+    margin: 0 9px;
+    border-right: 1px solid #D4D0C8;
+    border-left: 1px solid #D4D0C8;
+}
+
+.navbar-header.custom {
+    border-right: 1px solid white;
+}
+
+/********************************************************/
+
+/****************** Animation for Grid ******************/
+.grid-animate-container {
+    background: white;
+    list-style: none;
+    margin: 0;
+    padding: 0 10px;
+    position: relative;
+}
+
+.animate-repeat {
+    padding: 10px;
+}
+    
+    .animate-repeat.ng-enter {
+        -webkit-transition: all linear 0.5s;
+        transition: all linear 0.5s;
+    }
+
+    
+    .animate-repeat.ng-move,
+    .animate-repeat.ng-enter {
+        opacity: 0;
+    }
+
+    .animate-repeat.ng-leave.ng-leave-active,
+    .animate-repeat.ng-leave {
+        opacity: 0;
+    }
+
+        .animate-repeat.ng-move.ng-move-active,
+        .animate-repeat.ng-enter.ng-enter-active {
+            opacity: 0.2;
+        }
+
+/********************************************************/
+
+/****************** Bootstrap Accordion *****************/
+
+.ng-binding.text-muted {
+    font-weight: bold;
+}
+
+.group-head {
+    text-decoration: underline;
+    font-weight: bold;
+    text-align: center; 
+    width: 100%; 
+    display:block;
+}
+/****************** Custom Classes ******************/
+.refmapping-grid {
+    width: 99.8%;
+    height: 800px;
+}
+
+.gridlinks {
+    text-decoration: none; 
+    font-size: 1.00em;
+    font-weight: bold;
+    color: #211ECE;
+    padding-left: 5px;
+}
+
+.ui-grid-cell.red {
+   background-color: red !important; 
+   color: #000 !important;
+}
+
+a:link {
+ background-color: transparent; 
+}
+
+a:hover {
+  cursor: pointer;
+  background-color: #def ;
+}
+
+.fontSize{
+    font-weight: bold;
+    margin-left: 20px; 
+}
+
+/******************************************************/
+
+/****************** Kendo UI ******************/
+.demo-section p {
+    margin: 0 0 30px;
+    line-height: 50px;
+}
+
+    .demo-section p .k-button {
+        margin: 0 10px 0 0;
+    }
+
+.k-primary {
+    min-width: 150px;
+}
+
+/******************************************************/

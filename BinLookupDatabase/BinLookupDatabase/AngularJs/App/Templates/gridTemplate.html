@@ -1,0 +1,32 @@
+﻿<div class="grid-animate-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Bin Number</th>
+                <th>Card Bank</th>
+                <th>Card Country</th>
+                <th>Card Country Number</th>
+                <th>Gaming Friendly</th>
+                <th>Dec Ratio</th>
+                <th>Data Source</th>
+                <th>Updated By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="animate-repeat" ng-repeat="detail in details">
+                <td>
+                    <a href="#/binDetail/{{detail.BinNumber}}">
+                    {{detail.BinNumber}}
+                        </a>
+                </td>
+                <td>{{detail.CardIssuingbank}}</td>
+                <td>{{detail.CardIssuingCountryName}}</td>
+                <td>{{detail.CardIsoCountryNumber}}</td>
+                <td>{{detail.GamingFriendly}}</td>
+                <td>{{detail.DeclarationRatio}}</td>
+                <td>{{detail.DataSource}}</td>
+                <td>{{detail.UpdatedBy}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,51 @@
+﻿<div ng-controller="binDetailController"
+     ng-init="getUserDetails()">
+    <div>
+        <h3>{{pageTitle}}</h3>
+    </div>
+    <br/>
+    <div class="container-fluid">
+        <form name="binForm" ng-submit="search()">
+            <div class="col-sm-7 header-left">
+                <fieldset>
+                    <legend class="monitor">BIN Search</legend>
+                    <div class="left" style="padding-right: 20px">
+                        <input class="form-control" type="text" placeholder="Bin Number" ng-model="binNumber"/>
+                    </div>
+                    <div class="left" style="padding-right: 20px; width: 30%">
+                        <input class="form-control" type="text" placeholder="Bank Name" ng-model="bankName"/>
+                    </div>
+                    <div class="left" style="padding-right: 20px">
+                        <input class="form-control" type="text" placeholder="Country Name" ng-model="countryName"/>
+                    </div>
+                    <div class="left">
+                        <input class="form-control" type="text" placeholder="Currency Id" ng-model="currencyId"/>
+                    </div>
+
+                </fieldset>
+                <br/><br/><br/><br/><br/><br/>
+                <kendo-button class="k-primary">Search BIN</kendo-button>
+            </div>
+
+        </form>
+    </div>
+    <br/><br/>
+        <!--<div>{{countdown}}</div>-->
+        <div class="main" ng-show="details">
+            <div class="container-fluid smarttable">
+                <div class="row">
+                    <div class="grid-animate-container">
+                        <div class="animate-repeat">
+                            <div ng-include="'/AngularJs/App/Templates/gridTemplate.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="alert alert-danger" ng-show="error" style="width: 20%">
+        <strong>Error!</strong> {{error}}
+    </div>
+    <a class="fontSize" href="#/admin"> Go To Admin</a>
+    </div>
+
+
