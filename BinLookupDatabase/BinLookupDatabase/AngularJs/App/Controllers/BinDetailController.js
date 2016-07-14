@@ -29,7 +29,6 @@ binLookupApp.controller("binDetailController", function($scope, binDetailService
     };
     var onBinComplete = function(data)
     {
-        console.log(data);
         $scope.details = data;
         $scope.error = "";
         //$location.hash("binDetails");
@@ -38,7 +37,12 @@ binLookupApp.controller("binDetailController", function($scope, binDetailService
     var onError = function(response)
     {
         $scope.details = "";
-        $scope.error = response.data.message;
+        if (response.data === "") {
+            $scope.error = response.statusText;
+        }
+        else {
+            $scope.error = response.data.message;
+        }
     };
     //$scope.binParam = $routeParams.binNumber;  // from route in app.js
     //$location.path("/binDetail/" + binParam);  Through this we can move to another path which is mention in app.js like on click of search we can move to another html.
