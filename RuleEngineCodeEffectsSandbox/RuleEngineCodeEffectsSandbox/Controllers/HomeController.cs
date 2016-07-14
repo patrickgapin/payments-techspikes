@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using CodeEffects.Rule.Core;
 using CodeEffects.Rule.Models;
 using RuleEngineCodeEffectsSandbox.Models;
+using RuleEngineCodeEffectsSandbox.Models.CreditDeposit;
 using RuleEngineCodeEffectsSandbox.Services.Interfaces;
 
 namespace RuleEngineCodeEffectsSandbox.Controllers
@@ -19,43 +20,39 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Rule = RuleModel.Create(typeof(ShippingModel));
-            return View();
+            ViewBag.Rule = RuleModel.Create(typeof(CreditCardDepositModel));
+            return View(new CreditCardDepositModel());
         }
 
         [HttpPost]
-        public ActionResult Evaluate(ShippingModel shippingModel, RuleModel ruleEditor)
+        public ActionResult Evaluate(CreditCardDepositModel creditCardDepositModel, RuleModel ruleEditor)
         {
-            ruleEditor.BindSource(typeof(ShippingModel));
+            ruleEditor.BindSource(typeof(CreditCardDepositModel));
             ruleEditor.SkipNameValidation = true;
             ViewBag.Rule = ruleEditor;
 
             if (ruleEditor.IsEmpty() || !ruleEditor.IsValid(_ruleService.LoadRuleXml))
             {
                 ViewBag.Message = "The rule is empty or invalid";
-                return View("Index", shippingModel);
+                return View("Index", creditCardDepositModel);
             }
 
             ModelState.Clear();
 
             var rule = ruleEditor.GetRuleXml();
-            var evaluator = new Evaluator<ShippingModel>(rule, _ruleService.LoadRuleXml);
+            var evaluator = new Evaluator<CreditCardDepositModel>(rule, _ruleService.LoadRuleXml);
 
-            var success = evaluator.Evaluate(shippingModel);
+            evaluator.Evaluate(creditCardDepositModel);
 
-            if (!string.IsNullOrWhiteSpace(shippingModel.Output))
-                ViewBag.Message = shippingModel.Output;
-            else
-                ViewBag.Message = "The current rule evaluated to " + success;
-
-
-            return View("Index", shippingModel);
+            ViewBag.Message = "The rule passed: " + creditCardDepositModel.IsValid;
+            
+            return View("Index", creditCardDepositModel);
         }
 
         [HttpPost]
         public ActionResult Save(RuleModel ruleEditor)
         {
-            ruleEditor.BindSource(typeof(ShippingModel));
+            ruleEditor.BindSource(typeof(CreditCardDepositModel));
             ViewBag.Rule = ruleEditor;
 
             if (ruleEditor.IsEmpty() || !ruleEditor.IsValid(_ruleService.LoadRuleXml))
@@ -90,7 +87,7 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
             var ruleXml = _ruleService.LoadRuleXml(id);
 
             // Create a new model and store it in the bag
-            ViewBag.Rule = RuleModel.Create(ruleXml, typeof(ShippingModel));
+            ViewBag.Rule = RuleModel.Create(ruleXml, typeof(CreditCardDepositModel));
 
             ViewBag.Message = "The rule is loaded";
             return View("Index");
@@ -98,8 +95,8 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
 
         private void LoadMenuRules()
         {
-            ViewBag.ToolBarRules = _ruleService.GetAllRules(typeof(ShippingModel));
-            ViewBag.ContextMenuRules = _ruleService.GetEvaluationRules(typeof(ShippingModel));
+            ViewBag.ToolBarRules = _ruleService.GetAllRules(typeof(CreditCardDepositModel));
+            ViewBag.ContextMenuRules = _ruleService.GetEvaluationRules(typeof(CreditCardDepositModel));
         }
 
         private void ClearState(IReflect type, string prefix)

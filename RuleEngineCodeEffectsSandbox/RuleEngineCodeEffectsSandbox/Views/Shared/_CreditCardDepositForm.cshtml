@@ -1,0 +1,36 @@
+﻿@model RuleEngineCodeEffectsSandbox.Models.CreditDeposit.CreditCardDepositModel
+
+<div>
+    <div>
+        <div class="row">
+            <div>Customer Id:</div>
+            <div>@Html.TextBoxFor(m => m.Customer.CustomerId)</div>
+        </div>
+        <div class="row">
+            <div>Credit Card - First Name:</div>
+            <div>@Html.TextBoxFor(m => m.CreditCard.FirstName)</div>
+        </div>
+        <div class="row">
+            <div>Credit Card - Last Name:</div>
+            <div>@Html.TextBoxFor(m => m.CreditCard.LastName)</div>
+        </div>
+        <div class="row">
+            <div>Credit Card Number:</div>
+            <div>@Html.TextBoxFor(m => m.CreditCard.CreditCardNumber)</div>
+        </div>
+        <div class="row">
+            <div>Deposit Amount:</div>
+            <div>@Html.TextBoxFor(m => m.DepositTransaction.Amount)</div>
+        </div>
+
+        <br/>
+
+        @if (Model?.Notification != null)
+        {
+            @Model.Notification.Message
+        }
+    </div>
+    <div style="text-align:right;margin-top:10px;"><input type="submit" id="Button" name="Button" value="Test" class="button" /></div>
+    
+    <div class="clear"></div>
+</div>

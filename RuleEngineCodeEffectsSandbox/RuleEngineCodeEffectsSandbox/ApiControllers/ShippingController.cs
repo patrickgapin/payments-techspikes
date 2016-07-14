@@ -16,19 +16,19 @@ namespace RuleEngineCodeEffectsSandbox.ApiControllers
             _ruleService = ruleService;
         }
 
-        public IHttpActionResult Post([FromBody]ShippingModel shippingModel)
-        {
-            var rules = _ruleService.GetAllRules(false, typeof(ShippingModel));
+        //public IHttpActionResult Post([FromBody]ShippingModel shippingModel)
+        //{
+        //    var rules = _ruleService.GetAllRules(false, typeof(ShippingModel));
 
-            var isValid = rules.Where(node => node.XmlRule.ParentNode != null)
-                .Select(node => new Evaluator<ShippingModel>(node.XmlRule.ParentNode.OuterXml))
-                .Any(evaluator => evaluator.Evaluate(shippingModel));
+        //    var isValid = rules.Where(node => node.XmlRule.ParentNode != null)
+        //        .Select(node => new Evaluator<ShippingModel>(node.XmlRule.ParentNode.OuterXml))
+        //        .Any(evaluator => evaluator.Evaluate(shippingModel));
             
-            return Ok(new ShippingResponse<ShippingModel>
-            {
-                IsValid = isValid,
-                ResponseModel = shippingModel
-            });
-        }
+        //    return Ok(new ShippingResponse<ShippingModel>
+        //    {
+        //        IsValid = isValid,
+        //        ResponseModel = shippingModel
+        //    });
+        //}
     }
 }

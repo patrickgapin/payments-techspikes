@@ -160,11 +160,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Ioc\SimpleInjectorInitializer.cs" />
-    <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\Api\ShippingResponse.cs" />
-    <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\CreditDeposit\CreditCardDepositModel.cs" />
+    <Compile Include="Models\CreditDeposit\CreditCardModel.cs" />
+    <Compile Include="Models\CreditDeposit\CustomerModel.cs" />
+    <Compile Include="Models\CreditDeposit\DepositTransactionModel.cs" />
+    <Compile Include="Models\Notification\NotificationModel.cs" />
     <Compile Include="Models\RuleEngine\RulesModel.cs" />
-    <Compile Include="Models\ShippingModel.cs" />
+    <Compile Include="Models\Types\AddressTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\IRuleService.cs" />
     <Compile Include="Services\RuleService.cs" />
@@ -183,7 +186,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Rules\Execution\9a5bbd3f-c76e-4e8b-b56f-9cae955afcf0.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -208,10 +210,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_ShippingForm.cshtml" />
+    <Content Include="Views\Shared\_CreditCardDepositForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Rules\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
