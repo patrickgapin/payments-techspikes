@@ -1,10 +1,13 @@
 ﻿using System;
-using System.Reflection;
 using System.Web.Mvc;
+using AutoMapper;
 using CodeEffects.Rule.Core;
 using CodeEffects.Rule.Models;
-using RuleEngineCodeEffectsSandbox.Models;
-using RuleEngineCodeEffectsSandbox.Models.CreditDeposit;
+using PinnacleSports.RuleService.Models.CreditDeposit;
+using PinnacleSports.RuleService.Models.CreditDeposit.Interfaces;
+using PinnacleSports.RuleService.RuleServices;
+using RuleEngineCodeEffectsSandbox.Dto;
+using RuleEngineCodeEffectsSandbox.Mapping.Interfaces;
 using RuleEngineCodeEffectsSandbox.Services.Interfaces;
 
 namespace RuleEngineCodeEffectsSandbox.Controllers
@@ -12,20 +15,24 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
     public class HomeController : Controller
     {
         private readonly IRuleService _ruleService;
-        public HomeController(IRuleService ruleService)
+        private readonly ICreditCardDepositMapping _creditCardDepositMapping;
+
+        public HomeController(IRuleService ruleService,
+            ICreditCardDepositMapping creditCardDepositMapping)
         {
             _ruleService = ruleService;
+            _creditCardDepositMapping = creditCardDepositMapping;
             LoadMenuRules();
         }
 
         public ActionResult Index()
         {
             ViewBag.Rule = RuleModel.Create(typeof(CreditCardDepositModel));
-            return View(new CreditCardDepositModel());
+            return View(new CreditCardDepositDto());
         }
 
         [HttpPost]
-        public ActionResult Evaluate(CreditCardDepositModel creditCardDepositModel, RuleModel ruleEditor)
+        public ActionResult Evaluate(CreditCardDepositDto creditCardDepositDto, RuleModel ruleEditor)
         {
             ruleEditor.BindSource(typeof(CreditCardDepositModel));
             ruleEditor.SkipNameValidation = true;
@@ -34,7 +41,7 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
             if (ruleEditor.IsEmpty() || !ruleEditor.IsValid(_ruleService.LoadRuleXml))
             {
                 ViewBag.Message = "The rule is empty or invalid";
-                return View("Index", creditCardDepositModel);
+                return View("Index", creditCardDepositDto);
             }
 
             ModelState.Clear();
@@ -42,11 +49,20 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
             var rule = ruleEditor.GetRuleXml();
             var evaluator = new Evaluator<CreditCardDepositModel>(rule, _ruleService.LoadRuleXml);
 
-            evaluator.Evaluate(creditCardDepositModel);
+            var creditCardModel = _creditCardDepositMapping
+                .GetMapper()
+                .Map<CreditCardDepositModel>(creditCardDepositDto);
 
-            ViewBag.Message = "The rule passed: " + creditCardDepositModel.IsValid;
-            
-            return View("Index", creditCardDepositModel);
+            evaluator.Evaluate(creditCardModel);
+
+            ViewBag.Message = "The rule passed: " + creditCardModel.IsValid;
+
+            foreach (var message in creditCardModel.Notification.Message)
+            {
+                creditCardDepositDto.NotificationMessages.Add(message);
+            }
+
+            return View("Index", creditCardDepositDto);
         }
 
         [HttpPost]
@@ -93,16 +109,31 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
             return View("Index");
         }
 
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            // Create a new model and store it in the bag
+            ViewBag.Rule = RuleModel.Create(typeof(CreditCardDepositModel));
+
+            try
+            {
+                _ruleService.DeleteRule(id, typeof(CreditCardDepositModel));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+                return View("Index");
+            }
+
+            LoadMenuRules();
+
+            ViewBag.Message = "The rule was deleted successfully";
+            return View("Index");
+        }
+
         private void LoadMenuRules()
         {
             ViewBag.ToolBarRules = _ruleService.GetAllRules(typeof(CreditCardDepositModel));
-            ViewBag.ContextMenuRules = _ruleService.GetEvaluationRules(typeof(CreditCardDepositModel));
-        }
-
-        private void ClearState(IReflect type, string prefix)
-        {
-            foreach (var pi in type.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public))
-                ModelState.Remove(prefix + pi.Name);
         }
     }
 }

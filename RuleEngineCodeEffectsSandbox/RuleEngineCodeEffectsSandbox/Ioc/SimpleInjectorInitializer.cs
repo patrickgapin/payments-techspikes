@@ -1,13 +1,18 @@
 ﻿using System.Reflection;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
+using PinnacleSports.RuleRepo.Repository;
+using PinnacleSports.RuleRepo.Repository.Interfaces;
+using PinnacleSports.RuleService.Models.CreditDeposit;
+using PinnacleSports.RuleService.Models.CreditDeposit.Interfaces;
+using PinnacleSports.RuleService.RuleServices;
+using PinnacleSports.RuleService.RuleServices.Interfaces;
+using RuleEngineCodeEffectsSandbox.Mapping;
+using RuleEngineCodeEffectsSandbox.Mapping.Interfaces;
 using RuleEngineCodeEffectsSandbox.Services;
 using RuleEngineCodeEffectsSandbox.Services.Interfaces;
 using SimpleInjector;
-using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
-using SimpleInjector.Integration.WebApi;
 
 namespace RuleEngineCodeEffectsSandbox.Ioc
 {
@@ -17,16 +22,16 @@ namespace RuleEngineCodeEffectsSandbox.Ioc
         public static void Initialize()
         {
             var container = new Container();
-            container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
+            //container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
             InitializeContainer(container);
 
-            container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
+            //container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 
             container.Verify();
 
-            GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
+            //GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
         }
 
@@ -34,9 +39,14 @@ namespace RuleEngineCodeEffectsSandbox.Ioc
         {
             container.Register<IRuleService, RuleService>();
 
+            container.Register<ICustomerRuleService, CustomerRuleService>();
+            container.Register<ICreditCardRuleService, CreditCardRuleService>();
+            container.Register<ICreditCardDepositModel, CreditCardDepositModel>();
+            container.Register<ICreditCardDepositRepository, CreditCardDepositRepository>();
+            container.Register<ICreditCardDepositMapping, CreditCardDepositMapping>();
+
             HttpContextBase httpContextBase = new HttpContextWrapper(HttpContext.Current);
             container.RegisterPerWebRequest(() => httpContextBase);
-            
         }
     }
 }

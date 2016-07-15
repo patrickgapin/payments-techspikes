@@ -1,33 +1,36 @@
-﻿@model RuleEngineCodeEffectsSandbox.Models.CreditDeposit.CreditCardDepositModel
+﻿@model RuleEngineCodeEffectsSandbox.Dto.CreditCardDepositDto
 
 <div>
     <div>
         <div class="row">
             <div>Customer Id:</div>
-            <div>@Html.TextBoxFor(m => m.Customer.CustomerId)</div>
+            <div>@Html.TextBoxFor(m => m.CustomerId)</div>
         </div>
         <div class="row">
             <div>Credit Card - First Name:</div>
-            <div>@Html.TextBoxFor(m => m.CreditCard.FirstName)</div>
+            <div>@Html.TextBoxFor(m => m.CcFirstName)</div>
         </div>
         <div class="row">
             <div>Credit Card - Last Name:</div>
-            <div>@Html.TextBoxFor(m => m.CreditCard.LastName)</div>
+            <div>@Html.TextBoxFor(m => m.CcLastName)</div>
         </div>
         <div class="row">
             <div>Credit Card Number:</div>
-            <div>@Html.TextBoxFor(m => m.CreditCard.CreditCardNumber)</div>
+            <div>@Html.TextBoxFor(m => m.CcNumber)</div>
         </div>
         <div class="row">
             <div>Deposit Amount:</div>
-            <div>@Html.TextBoxFor(m => m.DepositTransaction.Amount)</div>
+            <div>@Html.TextBoxFor(m => m.Amount)</div>
         </div>
 
         <br/>
 
-        @if (Model?.Notification != null)
+        @if (Model?.NotificationMessages != null)
         {
-            @Model.Notification.Message
+            foreach (var message in Model.NotificationMessages)
+            {
+                @message;
+            }
         }
     </div>
     <div style="text-align:right;margin-top:10px;"><input type="submit" id="Button" name="Button" value="Test" class="button" /></div>

@@ -1,4 +1,4 @@
-﻿namespace RuleEngineCodeEffectsSandbox.Models.CreditDeposit
+﻿namespace PinnacleSports.RuleService.Models.CreditDeposit
 {
     public class DepositTransactionModel
     {

@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Web.Http;
-using CodeEffects.Rule.Core;
-using RuleEngineCodeEffectsSandbox.Models;
-using RuleEngineCodeEffectsSandbox.Models.Api;
+﻿using System.Web.Http;
 using RuleEngineCodeEffectsSandbox.Services.Interfaces;
 
 namespace RuleEngineCodeEffectsSandbox.ApiControllers

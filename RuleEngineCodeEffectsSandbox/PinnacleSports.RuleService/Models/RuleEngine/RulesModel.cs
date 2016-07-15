@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace RuleEngineCodeEffectsSandbox.Models.RuleEngine
+namespace PinnacleSports.RuleService.Models.RuleEngine
 {
     public class RulesModel
     {
