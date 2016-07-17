@@ -11,10 +11,14 @@ namespace RuleEngineCodeEffectsSandbox.Dto
         }
 
         public int CustomerId { get; set; }
+        public string CustomerFirstName { get; set; }
+        public string CustomerLastName { get; set; }
+
         public string CcFirstName { get; set; }
         public string CcLastName { get; set; }
         public string CcNumber { get; set; }
-        public double Amount { get; set; }
+
+        public double DepositAmount { get; set; }
 
         public IList<string> NotificationMessages { get; set; }
     }

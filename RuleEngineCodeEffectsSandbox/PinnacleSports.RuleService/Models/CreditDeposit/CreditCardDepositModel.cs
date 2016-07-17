@@ -1,55 +1,41 @@
-﻿using CodeEffects.Rule.Attributes;
-using PinnacleSports.RuleService.Models.CreditDeposit.Interfaces;
+﻿using System.Collections.Generic;
+using CodeEffects.Rule.Attributes;
 using PinnacleSports.RuleService.Models.Notification;
 using PinnacleSports.RuleService.RuleServices.Interfaces;
 
 namespace PinnacleSports.RuleService.Models.CreditDeposit
 {
-    public class CreditCardDepositModel : ICreditCardDepositModel
+    public class CreditCardDepositModel
     {
-        private readonly ICustomerRuleService _customerMonthlyLimit;
+        private readonly ICustomerRuleService _customerRuleService;
         private readonly ICreditCardRuleService _creditCardRuleService;
-
-        public CreditCardDepositModel(ICustomerRuleService customerMonthlyLimit, 
+        public CreditCardDepositModel(ICustomerRuleService customerRuleService, 
             ICreditCardRuleService creditCardRuleService)
         {
-            _customerMonthlyLimit = customerMonthlyLimit;
+            _customerRuleService = customerRuleService;
             _creditCardRuleService = creditCardRuleService;
-
-            Customer = new CustomerModel();
-            CreditCard = new CreditCardModel();
-            DepositTransaction = new DepositTransactionModel();
-            Notification = new NotificationModel();
         }
 
         public CustomerModel Customer { get; set; }
         public CreditCardModel CreditCard { get; set; }
         public DepositTransactionModel DepositTransaction { get; set; }
+        public List<string> BlockedCreditCards { get; set; }
 
         [ExcludeFromEvaluation]
         public NotificationModel Notification { get; set; }
         
-        [ExcludeFromEvaluation]
-        public string Output { get; set; }
-
         public bool IsValid { get; set; }
 
         [Method("Is Passed Monthly Limit", "Call External API to Check if Customer is Passed Monthly Limit.")]
-        public bool IsPassedMonthlyLimit(double amount)
+        public bool IsPassedMonthlyLimit()
         {
-            return _customerMonthlyLimit.IsPassedMonthlyLimit(Customer.CustomerId, amount);
+            return _customerRuleService.IsPassedMonthlyLimit(Customer.CustomerId, DepositTransaction.Amount);
         }
 
         [Method("Is Credit Card Blocked", "Call External API to Check if Credit Card is Blocked.")]
-        public bool IsCreditCardBlocked(string creditCardNumber)
+        public bool IsCreditCardBlocked()
         {
-            return _creditCardRuleService.IsCreditCardBlocked(creditCardNumber);
-        }
-
-        [Method("Is Name Match On Credit Card", "Call External API to Check if Name of Customer Matches CreditCard.")]
-        public bool IsNameMatchOnCreditCard(int customerId)
-        {
-            return _creditCardRuleService.IsNameMatchOnCreditCard(customerId);
+            return _creditCardRuleService.IsCreditCardBlocked(CreditCard.CreditCardNumber);
         }
 
         [Action("Set is Invalid", "Result that will be returned as Invalid.")]

@@ -48,12 +48,14 @@
     <Compile Include="Models\CreditDeposit\CreditCardModel.cs" />
     <Compile Include="Models\CreditDeposit\CustomerModel.cs" />
     <Compile Include="Models\CreditDeposit\DepositTransactionModel.cs" />
-    <Compile Include="Models\CreditDeposit\Interfaces\ICreditCardDepositModel.cs" />
     <Compile Include="Models\Notification\NotificationModel.cs" />
     <Compile Include="Models\RuleEngine\RulesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IDepositTransactionRepository.cs" />
     <Compile Include="RuleServices\CreditCardRuleService.cs" />
+    <Compile Include="RuleServices\CreditCardService.cs" />
     <Compile Include="RuleServices\CustomerRuleService.cs" />
+    <Compile Include="RuleServices\Interfaces\ICreditCardService.cs" />
     <Compile Include="RuleServices\Interfaces\ICreditCardRuleService.cs" />
     <Compile Include="RuleServices\Interfaces\ICustomerRuleService.cs" />
   </ItemGroup>

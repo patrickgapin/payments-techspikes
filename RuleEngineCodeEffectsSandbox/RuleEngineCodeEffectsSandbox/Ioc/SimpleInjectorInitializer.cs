@@ -3,8 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using PinnacleSports.RuleRepo.Repository;
 using PinnacleSports.RuleRepo.Repository.Interfaces;
-using PinnacleSports.RuleService.Models.CreditDeposit;
-using PinnacleSports.RuleService.Models.CreditDeposit.Interfaces;
+using PinnacleSports.RuleService.Repository;
 using PinnacleSports.RuleService.RuleServices;
 using PinnacleSports.RuleService.RuleServices.Interfaces;
 using RuleEngineCodeEffectsSandbox.Mapping;
@@ -41,7 +40,10 @@ namespace RuleEngineCodeEffectsSandbox.Ioc
 
             container.Register<ICustomerRuleService, CustomerRuleService>();
             container.Register<ICreditCardRuleService, CreditCardRuleService>();
-            container.Register<ICreditCardDepositModel, CreditCardDepositModel>();
+            container.Register<ICreditCardService, CreditCardService>();
+
+            container.Register<IDepositTransactionRepository, DepositTransactionRepository>();
+
             container.Register<ICreditCardDepositRepository, CreditCardDepositRepository>();
             container.Register<ICreditCardDepositMapping, CreditCardDepositMapping>();
 

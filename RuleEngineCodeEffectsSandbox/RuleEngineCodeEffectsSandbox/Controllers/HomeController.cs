@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
-using AutoMapper;
 using CodeEffects.Rule.Core;
 using CodeEffects.Rule.Models;
 using PinnacleSports.RuleService.Models.CreditDeposit;
-using PinnacleSports.RuleService.Models.CreditDeposit.Interfaces;
-using PinnacleSports.RuleService.RuleServices;
 using RuleEngineCodeEffectsSandbox.Dto;
 using RuleEngineCodeEffectsSandbox.Mapping.Interfaces;
 using RuleEngineCodeEffectsSandbox.Services.Interfaces;

@@ -1,7 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using PinnacleSports.RuleService.Models.CreditDeposit;
-using PinnacleSports.RuleService.Models.CreditDeposit.Interfaces;
-using PinnacleSports.RuleService.RuleServices;
+using PinnacleSports.RuleService.Models.Notification;
 using PinnacleSports.RuleService.RuleServices.Interfaces;
 using RuleEngineCodeEffectsSandbox.Dto;
 using RuleEngineCodeEffectsSandbox.Mapping.Interfaces;
@@ -10,11 +10,17 @@ namespace RuleEngineCodeEffectsSandbox.Mapping
 {
     public class CreditCardDepositMapping : ICreditCardDepositMapping
     {
-        private readonly ICreditCardDepositModel _cardDepositModel;
+        private readonly ICustomerRuleService _customerRuleService;
+        private readonly ICreditCardRuleService _creditCardRuleServicel;
+        private readonly ICreditCardService _creditCardService;
 
-        public CreditCardDepositMapping(ICreditCardDepositModel cardDepositModel)
+        public CreditCardDepositMapping(ICustomerRuleService customerRuleService, 
+            ICreditCardRuleService creditCardRuleServicel, 
+            ICreditCardService creditCardService)
         {
-            _cardDepositModel = cardDepositModel;
+            _customerRuleService = customerRuleService;
+            _creditCardRuleServicel = creditCardRuleServicel;
+            _creditCardService = creditCardService;
         }
 
         public IMapper GetMapper()
@@ -23,15 +29,24 @@ namespace RuleEngineCodeEffectsSandbox.Mapping
             {
                 cfg.CreateMap<CreditCardDepositDto, CreditCardDepositModel>()
                     .ConstructUsing(
-                        dto =>
+                        dto => new CreditCardDepositModel(_customerRuleService,
+                            _creditCardRuleServicel)
                         {
-                            _cardDepositModel.Customer.CustomerId = dto.CustomerId;
-                            _cardDepositModel.CreditCard.FirstName = dto.CcFirstName;
-                            _cardDepositModel.CreditCard.LastName = dto.CcLastName;
-                            _cardDepositModel.CreditCard.CreditCardNumber = dto.CcNumber;
-                            _cardDepositModel.DepositTransaction.Amount = dto.Amount;
-
-                            return (CreditCardDepositModel)_cardDepositModel;
+                            Customer = new CustomerModel()
+                            {
+                                CustomerId = dto.CustomerId,
+                                FirstName = dto.CustomerFirstName,
+                                LastName = dto.CustomerLastName
+                            },
+                            CreditCard = new CreditCardModel(dto.CcFirstName,
+                                dto.CcLastName,
+                                dto.CcNumber),
+                            DepositTransaction = new DepositTransactionModel()
+                            {
+                                Amount = dto.DepositAmount
+                            },
+                            BlockedCreditCards = _creditCardService.GetBlockedCreditCards().ToList(),
+                            Notification = new NotificationModel()
                         });
             });
 

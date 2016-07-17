@@ -1,8 +1,10 @@
-﻿namespace PinnacleSports.RuleService.Models.CreditDeposit
+﻿using System;
+
+namespace PinnacleSports.RuleService.Models.CreditDeposit
 {
     public class DepositTransactionModel
     {
-        public int TransactionId { get; set; }
+        public Guid TransactionId { get; set; }
         public double Amount { get; set; }
     }
 }
