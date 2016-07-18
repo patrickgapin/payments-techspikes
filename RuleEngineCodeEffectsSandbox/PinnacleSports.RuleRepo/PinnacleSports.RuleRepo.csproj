@@ -43,8 +43,10 @@
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CreditCardDepositRepository.cs" />
+    <Compile Include="Repository\CreditCardRepository.cs" />
     <Compile Include="Repository\DepositTransactionRepository.cs" />
     <Compile Include="Repository\Interfaces\ICreditCardDepositRepository.cs" />
+    <Compile Include="Repository\Interfaces\ICreditCardRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

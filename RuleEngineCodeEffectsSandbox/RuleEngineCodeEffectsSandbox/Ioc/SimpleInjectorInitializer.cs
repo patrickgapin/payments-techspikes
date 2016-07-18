@@ -39,8 +39,7 @@ namespace RuleEngineCodeEffectsSandbox.Ioc
             container.Register<IRuleService, RuleService>();
 
             container.Register<ICustomerRuleService, CustomerRuleService>();
-            container.Register<ICreditCardRuleService, CreditCardRuleService>();
-            container.Register<ICreditCardService, CreditCardService>();
+            container.Register<ICreditCardRepository, CreditCardRepository>();
 
             container.Register<IDepositTransactionRepository, DepositTransactionRepository>();
 

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
+using PinnacleSports.RuleRepo.Repository.Interfaces;
 using PinnacleSports.RuleService.Models.CreditDeposit;
 using PinnacleSports.RuleService.Models.Notification;
 using PinnacleSports.RuleService.RuleServices.Interfaces;
@@ -11,16 +12,13 @@ namespace RuleEngineCodeEffectsSandbox.Mapping
     public class CreditCardDepositMapping : ICreditCardDepositMapping
     {
         private readonly ICustomerRuleService _customerRuleService;
-        private readonly ICreditCardRuleService _creditCardRuleServicel;
-        private readonly ICreditCardService _creditCardService;
+        private readonly ICreditCardRepository _creditCardRepository; 
 
         public CreditCardDepositMapping(ICustomerRuleService customerRuleService, 
-            ICreditCardRuleService creditCardRuleServicel, 
-            ICreditCardService creditCardService)
+            ICreditCardRepository creditCardRepository)
         {
             _customerRuleService = customerRuleService;
-            _creditCardRuleServicel = creditCardRuleServicel;
-            _creditCardService = creditCardService;
+            _creditCardRepository = creditCardRepository;
         }
 
         public IMapper GetMapper()
@@ -29,8 +27,7 @@ namespace RuleEngineCodeEffectsSandbox.Mapping
             {
                 cfg.CreateMap<CreditCardDepositDto, CreditCardDepositModel>()
                     .ConstructUsing(
-                        dto => new CreditCardDepositModel(_customerRuleService,
-                            _creditCardRuleServicel)
+                        dto => new CreditCardDepositModel(_customerRuleService)
                         {
                             Customer = new CustomerModel()
                             {
@@ -45,7 +42,7 @@ namespace RuleEngineCodeEffectsSandbox.Mapping
                             {
                                 Amount = dto.DepositAmount
                             },
-                            BlockedCreditCards = _creditCardService.GetBlockedCreditCards().ToList(),
+                            BlockedCreditCards = _creditCardRepository.GetBlockedCreditCards().ToList(),
                             Notification = new NotificationModel()
                         });
             });

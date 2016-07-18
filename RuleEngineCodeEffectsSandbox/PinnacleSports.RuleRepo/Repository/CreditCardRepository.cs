@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using PinnacleSports.RuleService.RuleServices.Interfaces;
+using PinnacleSports.RuleService.Repository;
+using ICreditCardRepository = PinnacleSports.RuleRepo.Repository.Interfaces.ICreditCardRepository;
 
-namespace PinnacleSports.RuleService.RuleServices
+namespace PinnacleSports.RuleRepo.Repository
 {
-    public class CreditCardService : ICreditCardService
+    public class CreditCardRepository : ICreditCardRepository
     {
         public IList<string> GetBlockedCreditCards()
         {

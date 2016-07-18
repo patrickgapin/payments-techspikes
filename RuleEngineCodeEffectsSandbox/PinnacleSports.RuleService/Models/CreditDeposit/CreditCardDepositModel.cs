@@ -8,12 +8,9 @@ namespace PinnacleSports.RuleService.Models.CreditDeposit
     public class CreditCardDepositModel
     {
         private readonly ICustomerRuleService _customerRuleService;
-        private readonly ICreditCardRuleService _creditCardRuleService;
-        public CreditCardDepositModel(ICustomerRuleService customerRuleService, 
-            ICreditCardRuleService creditCardRuleService)
+        public CreditCardDepositModel(ICustomerRuleService customerRuleService)
         {
             _customerRuleService = customerRuleService;
-            _creditCardRuleService = creditCardRuleService;
         }
 
         public CustomerModel Customer { get; set; }
@@ -31,13 +28,7 @@ namespace PinnacleSports.RuleService.Models.CreditDeposit
         {
             return _customerRuleService.IsPassedMonthlyLimit(Customer.CustomerId, DepositTransaction.Amount);
         }
-
-        [Method("Is Credit Card Blocked", "Call External API to Check if Credit Card is Blocked.")]
-        public bool IsCreditCardBlocked()
-        {
-            return _creditCardRuleService.IsCreditCardBlocked(CreditCard.CreditCardNumber);
-        }
-
+        
         [Action("Set is Invalid", "Result that will be returned as Invalid.")]
         public void IsInvalid(string returnMessage)
         {
