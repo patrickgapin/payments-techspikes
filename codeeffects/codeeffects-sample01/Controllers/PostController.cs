@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using codeeffects_sample01.Rules.DepositLimits;
 using codeeffects_sample01.Services;
+using CodeEffects.Rule.Common;
 using CodeEffects.Rule.Core;
 using CodeEffects.Rule.Models;
 
@@ -20,10 +21,24 @@ namespace codeeffects_sample01.Controllers
             this.LoadMenuRules();
         }
 
+        private List<DataSourceHolder> BuildDataSource()
+        {
+            var helper = new DepositLimitHelper(3);
+            var holder = new DataSourceHolder()
+            {
+                Delegate = helper.GetTestNumbers,
+                Name = "Numbers"
+            };
+            var dataSources = new List<DataSourceHolder> { holder };
+            return dataSources;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
             ViewBag.Rule = RuleModel.Create(typeof(DepositLimitRule));
+            ViewBag.Numbers = BuildDataSource();
+
             return View();
         }
 

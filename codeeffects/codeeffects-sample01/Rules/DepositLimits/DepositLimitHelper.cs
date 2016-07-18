@@ -5,12 +5,18 @@ using System.Web;
 using codeeffects_sample01.Models;
 using codeeffects_sample01.Models.CreditCard;
 using CodeEffects.Rule.Attributes;
+using CodeEffects.Rule.Common;
 
 namespace codeeffects_sample01.Rules.DepositLimits
 {
     public class DepositLimitHelper
     {
-        public string Test { get; set; }
+        public int Test { get; set; }
+
+        public DepositLimitHelper(int test)
+        {
+            Test = test;
+        }
 
         // The Parameter passed to an external Action method can be: Value type, String, Enumerable or Source object type.
         [Action(DisplayName = "-- Accept Card --")]
@@ -29,6 +35,27 @@ namespace codeeffects_sample01.Rules.DepositLimits
             var isMaxValid = rule.CreditCard.Amount <= cardsLimitsHelper.CardLimits[rule.CreditCard.Type].Item2;
 
             return isMinValid && isMaxValid;
+        }
+
+        // This public parameterless function will be used as a dynamic source for the property TestNumber declared in our DepositLimitRule Sourceobject.
+        public List<DataSourceItem> GetTestNumbers()
+        {
+            var list = new List<DataSourceItem>();
+
+            // Customize the return of this method
+            // based on the value of "test" field
+            if (this.Test > 4)
+            {
+                list.Add(new DataSourceItem(5, "Five"));
+                list.Add(new DataSourceItem(6, "Six"));
+            }
+            else
+            {
+                list.Add(new DataSourceItem(1, "One"));
+                list.Add(new DataSourceItem(2, "Two"));
+            }
+
+            return list;
         }
     }
 }

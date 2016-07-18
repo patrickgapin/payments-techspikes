@@ -37,6 +37,8 @@ namespace codeeffects_sample01.Rules.DepositLimits
         // This property is used to display outputs of rule actions
         [ExcludeFromEvaluation]
         public string Output { get; set; }
+        
+        public int TestNumber { get; set; }
 
     }
 

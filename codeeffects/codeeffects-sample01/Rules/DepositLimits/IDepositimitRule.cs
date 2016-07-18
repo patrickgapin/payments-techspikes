@@ -17,5 +17,8 @@ namespace codeeffects_sample01.Rules.DepositLimits
         CreditCard CreditCard { get; set; }
 
         User  Client { get; set; }
+
+        [Field(DataSourceName = "Numbers")]
+        int TestNumber { get; set; }
     }
 }
