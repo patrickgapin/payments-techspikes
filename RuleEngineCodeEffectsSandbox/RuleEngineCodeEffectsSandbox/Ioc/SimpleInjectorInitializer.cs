@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using PinnacleSports.RuleRepo.Repository;
 using PinnacleSports.RuleRepo.Repository.Interfaces;
@@ -11,7 +12,9 @@ using RuleEngineCodeEffectsSandbox.Mapping.Interfaces;
 using RuleEngineCodeEffectsSandbox.Services;
 using RuleEngineCodeEffectsSandbox.Services.Interfaces;
 using SimpleInjector;
+using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
+using SimpleInjector.Integration.WebApi;
 
 namespace RuleEngineCodeEffectsSandbox.Ioc
 {
@@ -21,16 +24,16 @@ namespace RuleEngineCodeEffectsSandbox.Ioc
         public static void Initialize()
         {
             var container = new Container();
-            //container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
+            container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
             InitializeContainer(container);
 
-            //container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
+            container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 
             container.Verify();
 
-            //GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
         }
 

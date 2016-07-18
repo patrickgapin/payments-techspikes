@@ -154,7 +154,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiControllers\ShippingController.cs" />
+    <Compile Include="ApiControllers\CreditCardDepositController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -213,7 +213,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

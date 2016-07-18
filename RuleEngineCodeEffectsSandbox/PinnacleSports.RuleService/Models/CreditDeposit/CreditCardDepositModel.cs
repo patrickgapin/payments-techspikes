@@ -24,9 +24,9 @@ namespace PinnacleSports.RuleService.Models.CreditDeposit
         public bool IsValid { get; set; }
 
         [Method("Is Passed Monthly Limit", "Call External API to Check if Customer is Passed Monthly Limit.")]
-        public bool IsPassedMonthlyLimit()
+        public bool IsPassedMonthlyLimit(double monthlyLimit)
         {
-            return _customerRuleService.IsPassedMonthlyLimit(Customer.CustomerId, DepositTransaction.Amount);
+            return _customerRuleService.IsPassedMonthlyLimit(Customer.CustomerId, DepositTransaction.Amount, monthlyLimit);
         }
         
         [Action("Set is Invalid", "Result that will be returned as Invalid.")]

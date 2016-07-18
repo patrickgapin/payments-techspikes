@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Xml;
 using System.Xml.Linq;
 using PinnacleSports.RuleRepo.Helpers;
 using PinnacleSports.RuleRepo.Repository.Interfaces;
@@ -33,6 +32,21 @@ namespace PinnacleSports.RuleRepo.Repository
 
             return
                 $"{GetRootPath()}\\Rules\\{(isEval ? "Evaluation" : "Execution")}\\{ruleId}.config";
+        }
+
+        public SortedList<int, RulesModel> GetRuleFlowSortedList(Type modelType)
+        {
+            var ruleList = GetAllRules(modelType);
+
+            var sortedList = new SortedList<int, RulesModel>();
+            foreach (var rulesModel in ruleList)
+            {
+                int index;
+                if(rulesModel.Name.IndexOf(".", StringComparison.Ordinal) >= 0 &&
+                        int.TryParse(rulesModel.Name.Substring(0, rulesModel.Name.IndexOf(".", StringComparison.Ordinal)), out index))
+                    sortedList.Add(index, rulesModel);
+            }
+            return sortedList;
         }
 
         public IList<RulesModel> GetAllRules(Type modelType)

@@ -17,6 +17,8 @@ namespace PinnacleSports.RuleService.Models.RuleEngine
 
         public XElement XmlRule { get; }
 
+        public XElement XmlRuleFull => XmlRule?.Parent;
+
         public string RuleId => XmlRule.Attributes("id").FirstOrDefault()?.Value;
 
         public string Name => XmlRule.Descendants(XNamespace + "name").FirstOrDefault()?.Value;

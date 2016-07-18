@@ -26,7 +26,6 @@ namespace RuleEngineCodeEffectsSandbox.Services
         
         public List<MenuItem> GetAllRules(Type modelType)
         {
-            // Get both execution and evaluation type rules, merge them, sort them and return the result
             var rules = LoadRulesMenuItems(modelType);
             rules.Sort((mi1, mi2) => string.Compare(mi1.DisplayName, mi2.DisplayName, StringComparison.Ordinal));
             return rules;

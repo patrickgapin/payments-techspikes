@@ -2,6 +2,6 @@
 {
     public interface ICustomerRuleService
     {
-        bool IsPassedMonthlyLimit(int customerId, double amount);
+        bool IsPassedMonthlyLimit(int customerId, double amount, double monthlyLimit);
     }
 }

@@ -14,9 +14,9 @@ namespace PinnacleSports.RuleService.RuleServices
             _depositTransactionRepository = depositTransactionRepository;
         }
 
-        public bool IsPassedMonthlyLimit(int customerId, double amount)
+        public bool IsPassedMonthlyLimit(int customerId, double amount, double monthlyLimit)
         {
-            return amount > _depositTransactionRepository.GetDepositTransactionList(customerId).Sum(model => model.Amount);
+            return amount + _depositTransactionRepository.GetDepositTransactionList(customerId).Sum(model => model.Amount) > monthlyLimit;
         }
     }
 }
