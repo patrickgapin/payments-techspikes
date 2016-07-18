@@ -1,16 +1,26 @@
-﻿using System.Xml;
+﻿using System;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace PinnacleSports.RuleService.Models.RuleEngine
 {
     public class RulesModel
     {
-        public RulesModel(XmlDocument xml)
+        public RulesModel(XContainer xml, Type modelType)
         {
-            XmlNamespaceManager = new XmlNamespaceManager(xml.NameTable);
-            if (xml.DocumentElement != null) XmlNamespaceManager.AddNamespace("x", xml.DocumentElement.NamespaceURI);
+            XmlRule = xml.Descendants(XNamespace + "rule")
+                .FirstOrDefault(element => element.Attribute("type").Value == modelType.AssemblyQualifiedName);
         }
 
-        public XmlNamespaceManager XmlNamespaceManager { get; }
-        public XmlNode XmlRule { get; set; }
+        public XNamespace XNamespace => Properties.Settings.Default.CodeEffectsNamespace;
+
+        public XElement XmlRule { get; }
+
+        public string RuleId => XmlRule.Attributes("id").FirstOrDefault()?.Value;
+
+        public string Name => XmlRule.Descendants(XNamespace + "name").FirstOrDefault()?.Value;
+
+        public string Description => XmlRule.Descendants(XNamespace + "description").FirstOrDefault()?.Value;
     }
 }

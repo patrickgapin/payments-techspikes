@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CodeEffects.Rule.Common;
 using PinnacleSports.RuleRepo.Repository.Interfaces;
 using RuleEngineCodeEffectsSandbox.Services.Interfaces;
@@ -17,22 +18,10 @@ namespace RuleEngineCodeEffectsSandbox.Services
 
         public List<MenuItem> LoadRulesMenuItems(Type modelType)
         {
-            var list = new List<MenuItem>();
-
             var rules = _creditCardDepositRepository.GetAllRules(modelType);
 
-            foreach (var rule in rules)
-            {
-                if (rule.XmlRule?.Attributes != null)
-                {
-                    list.Add(new MenuItem(
-                        rule.XmlRule.Attributes["id"].Value,
-                        rule.XmlRule.SelectSingleNode("x:name", rule.XmlNamespaceManager)?.InnerText,
-                        rule.XmlRule.SelectSingleNode("x:description", rule.XmlNamespaceManager) == null ? 
-                            null : rule.XmlRule.SelectSingleNode("x:description", rule.XmlNamespaceManager)?.InnerText));
-                }
-            }
-            return list;
+            return rules.Where(rule => rule.XmlRule != null)
+                .Select(rule => new MenuItem(rule.RuleId, rule.Name, rule.Description)).ToList();
         }
         
         public List<MenuItem> GetAllRules(Type modelType)

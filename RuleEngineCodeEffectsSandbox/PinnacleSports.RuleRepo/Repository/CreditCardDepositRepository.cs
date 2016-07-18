@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
+using System.Xml.Linq;
 using PinnacleSports.RuleRepo.Helpers;
 using PinnacleSports.RuleRepo.Repository.Interfaces;
 using PinnacleSports.RuleService.Models.RuleEngine;
@@ -38,22 +39,14 @@ namespace PinnacleSports.RuleRepo.Repository
         {
             // Get both execution and evaluation type rules, merge them, sort them and return the result
             var fileList = FileHelper.DirectorySearch($"{GetRootPath()}\\Rules\\");
-            
+
             var list = new List<RulesModel>();
 
             if (fileList.Count == 0)
                 return list;
 
-            foreach (var file in fileList)
-            {
-                var xml = new XmlDocument();
-                xml.Load(file);
-
-                var ruleModel = new RulesModel(xml);
-                ruleModel.XmlRule = xml.SelectSingleNode($"/x:codeeffects/x:rule[@type='{modelType.AssemblyQualifiedName}']",
-                        ruleModel.XmlNamespaceManager);
-                list.Add(ruleModel);
-            }
+            list.AddRange(fileList.Select(XDocument.Load)
+                .Select(xml => new RulesModel(xml, modelType)));
 
             return list;
         }
