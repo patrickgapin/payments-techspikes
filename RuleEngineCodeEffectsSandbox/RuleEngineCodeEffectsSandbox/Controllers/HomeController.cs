@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
-using CodeEffects.Rule.Core;
 using CodeEffects.Rule.Models;
 using PinnacleSports.RuleService.Models.CreditDeposit;
 using RuleEngineCodeEffectsSandbox.Dto;
 using RuleEngineCodeEffectsSandbox.Mapping.Interfaces;
+using RuleEngineCodeEffectsSandbox.RuleEngine.Interfaces;
 using RuleEngineCodeEffectsSandbox.Services.Interfaces;
 
 namespace RuleEngineCodeEffectsSandbox.Controllers
@@ -13,12 +13,16 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
     {
         private readonly IRuleService _ruleService;
         private readonly ICreditCardDepositMapping _creditCardDepositMapping;
+        private readonly IRuleEngineEvaluator _ruleEngineEvaluator;
 
         public HomeController(IRuleService ruleService,
-            ICreditCardDepositMapping creditCardDepositMapping)
+            ICreditCardDepositMapping creditCardDepositMapping, 
+            IRuleEngineEvaluator ruleEngineEvaluator)
         {
             _ruleService = ruleService;
             _creditCardDepositMapping = creditCardDepositMapping;
+            _ruleEngineEvaluator = ruleEngineEvaluator;
+
             LoadMenuRules();
         }
 
@@ -43,14 +47,12 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
 
             ModelState.Clear();
 
-            var rule = ruleEditor.GetRuleXml();
-            var evaluator = new Evaluator<CreditCardDepositModel>(rule, _ruleService.LoadRuleXml);
-
             var creditCardModel = _creditCardDepositMapping
                 .GetMapper()
                 .Map<CreditCardDepositModel>(creditCardDepositDto);
-
-            evaluator.Evaluate(creditCardModel);
+            
+            _ruleEngineEvaluator.Evaluate(_ruleService.LoadRuleXml(ruleEditor.Id),
+                creditCardModel);
 
             ViewBag.Message = "The rule passed: " + creditCardModel.IsValid;
 
@@ -96,10 +98,8 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
         [HttpGet]
         public ActionResult Load(string id)
         {
-            // Load rule from the storage
             var ruleXml = _ruleService.LoadRuleXml(id);
 
-            // Create a new model and store it in the bag
             ViewBag.Rule = RuleModel.Create(ruleXml, typeof(CreditCardDepositModel));
 
             ViewBag.Message = "The rule is loaded";
@@ -109,7 +109,6 @@ namespace RuleEngineCodeEffectsSandbox.Controllers
         [HttpGet]
         public ActionResult Delete(string id)
         {
-            // Create a new model and store it in the bag
             ViewBag.Rule = RuleModel.Create(typeof(CreditCardDepositModel));
 
             try

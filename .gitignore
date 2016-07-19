@@ -14,6 +14,9 @@ build/
 [Bb]in/
 [Oo]bj/
 
+#node_module folder - npm
+node_modules/
+
 # Visual Studio 2015
 .vs/
 TestResults/

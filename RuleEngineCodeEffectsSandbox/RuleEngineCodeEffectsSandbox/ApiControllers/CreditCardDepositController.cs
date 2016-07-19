@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using CodeEffects.Rule.Core;
 using PinnacleSports.RuleRepo.Repository.Interfaces;
 using PinnacleSports.RuleService.Models.CreditDeposit;
 using RuleEngineCodeEffectsSandbox.Dto;
 using RuleEngineCodeEffectsSandbox.Mapping.Interfaces;
+using RuleEngineCodeEffectsSandbox.RuleEngine.Interfaces;
 
 namespace RuleEngineCodeEffectsSandbox.ApiControllers
 {
@@ -13,12 +13,15 @@ namespace RuleEngineCodeEffectsSandbox.ApiControllers
     {
         private readonly ICreditCardDepositRepository _creditCardDepositRepository;
         private readonly ICreditCardDepositMapping _creditCardDepositMapping;
+        private readonly IRuleEngineEvaluator _ruleEngineEvaluator;
 
         public CreditCardDepositController(ICreditCardDepositRepository creditCardDepositRepository, 
-            ICreditCardDepositMapping creditCardDepositMapping)
+            ICreditCardDepositMapping creditCardDepositMapping, 
+            IRuleEngineEvaluator ruleEngineEvaluator)
         {
             _creditCardDepositRepository = creditCardDepositRepository;
             _creditCardDepositMapping = creditCardDepositMapping;
+            _ruleEngineEvaluator = ruleEngineEvaluator;
         }
         
         public IHttpActionResult Post([FromBody] CreditCardDepositDto creditCardDepositDto)
@@ -31,9 +34,8 @@ namespace RuleEngineCodeEffectsSandbox.ApiControllers
 
             foreach (var rulesModel in rulesList)
             {
-                new Evaluator<CreditCardDepositModel>(rulesModel.Value.XmlRuleFull.ToString())
-                    .Evaluate(creditCardModel);
-
+                _ruleEngineEvaluator.Evaluate(rulesModel.Value.XmlRuleFull.ToString(), creditCardModel);
+                
                 if (!creditCardModel.IsValid)
                     return Ok(new { creditCardModel.IsValid, Messages = creditCardModel.Notification.Message.ToList() });
             }

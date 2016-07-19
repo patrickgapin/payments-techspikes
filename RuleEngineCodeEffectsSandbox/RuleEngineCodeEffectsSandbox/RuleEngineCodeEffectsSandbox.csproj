@@ -168,6 +168,8 @@
     <Compile Include="Mapping\CreditCardDepositMapping.cs" />
     <Compile Include="Mapping\Interfaces\ICreditCardDepositMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuleEngine\Interfaces\IRuleEngineEvaluator.cs" />
+    <Compile Include="RuleEngine\RuleEngineEvaluator.cs" />
     <Compile Include="Services\Interfaces\IRuleService.cs" />
     <Compile Include="Services\RuleService.cs" />
   </ItemGroup>

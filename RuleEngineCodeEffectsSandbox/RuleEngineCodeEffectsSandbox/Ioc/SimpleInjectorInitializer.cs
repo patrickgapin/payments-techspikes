@@ -9,6 +9,8 @@ using PinnacleSports.RuleService.RuleServices;
 using PinnacleSports.RuleService.RuleServices.Interfaces;
 using RuleEngineCodeEffectsSandbox.Mapping;
 using RuleEngineCodeEffectsSandbox.Mapping.Interfaces;
+using RuleEngineCodeEffectsSandbox.RuleEngine;
+using RuleEngineCodeEffectsSandbox.RuleEngine.Interfaces;
 using RuleEngineCodeEffectsSandbox.Services;
 using RuleEngineCodeEffectsSandbox.Services.Interfaces;
 using SimpleInjector;
@@ -48,6 +50,8 @@ namespace RuleEngineCodeEffectsSandbox.Ioc
 
             container.Register<ICreditCardDepositRepository, CreditCardDepositRepository>();
             container.Register<ICreditCardDepositMapping, CreditCardDepositMapping>();
+
+            container.Register<IRuleEngineEvaluator, RuleEngineEvaluator>();
 
             HttpContextBase httpContextBase = new HttpContextWrapper(HttpContext.Current);
             container.RegisterPerWebRequest(() => httpContextBase);
