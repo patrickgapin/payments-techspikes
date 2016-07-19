@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeEffects.Rule.Attributes;
 using PinnacleSports.RuleService.Models.Notification;
+using PinnacleSports.RuleService.Repository;
 using PinnacleSports.RuleService.RuleServices.Interfaces;
 
 namespace PinnacleSports.RuleService.Models.CreditDeposit
