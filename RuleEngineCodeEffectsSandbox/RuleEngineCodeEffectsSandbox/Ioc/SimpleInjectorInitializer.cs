@@ -19,6 +19,7 @@ using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
 using SimpleInjector.Integration.WebApi;
+using PinnacleSports.RuleService.Helpers;
 
 namespace RuleEngineCodeEffectsSandbox.Ioc
 {
@@ -56,6 +57,7 @@ namespace RuleEngineCodeEffectsSandbox.Ioc
             var ruleEngineFactory = new RuleEngineFactory(container);
             ruleEngineFactory.Register<IDepositTransactionRepository, DepositTransactionRepository>(RuleEngineTypes.ImplementationType.DepositTransactionRepository);
             container.RegisterSingleton<IRuleEngineFactory>(ruleEngineFactory);
+
 
             HttpContextBase httpContextBase = new HttpContextWrapper(HttpContext.Current);
             container.RegisterPerWebRequest(() => httpContextBase);

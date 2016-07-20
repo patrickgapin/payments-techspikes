@@ -13,8 +13,9 @@ namespace RuleEngineCodeEffectsSandbox.Mapping
     {
         private readonly IRuleEngineFactory _ruleEngineFactory;
         private readonly ICreditCardRepository _creditCardRepository; 
+	private readonly ICustomerRuleService _customerRuleService;
 
-        public CreditCardDepositMapping(IRuleEngineFactory ruleEngineFactory, 
+        public CreditCardDepositMapping(IRuleEngineFactory ruleEngineFactory, ICustomerRuleService customerRuleService,
             ICreditCardRepository creditCardRepository)
         {
             _creditCardRepository = creditCardRepository;
@@ -29,6 +30,7 @@ namespace RuleEngineCodeEffectsSandbox.Mapping
                     .ConstructUsing(
                         dto => new CreditCardDepositModel(_ruleEngineFactory)
                         {
+                            Client = new ClientModel { ClientRoleID = dto.ClientRoleId },
                             Customer = new CustomerModel()
                             {
                                 CustomerId = dto.CustomerId,

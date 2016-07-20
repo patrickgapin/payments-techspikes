@@ -10,6 +10,7 @@ namespace RuleEngineCodeEffectsSandbox.Dto
             NotificationMessages = new List<string>();
         }
 
+        public int ClientRoleId { get; set; }
         public int CustomerId { get; set; }
         public string CustomerFirstName { get; set; }
         public string CustomerLastName { get; set; }
@@ -20,6 +21,6 @@ namespace RuleEngineCodeEffectsSandbox.Dto
 
         public double DepositAmount { get; set; }
 
-        public IList<string> NotificationMessages { get; set; }
+        public IList<string> NotificationMessages { get; private set; }
     }
 }

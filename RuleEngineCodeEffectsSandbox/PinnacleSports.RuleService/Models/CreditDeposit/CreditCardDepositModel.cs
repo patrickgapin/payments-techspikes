@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using CodeEffects.Rule.Attributes;
 using PinnacleSports.RuleService.Models.Notification;
+using PinnacleSports.RuleService.RuleServices.Interfaces;
+using PinnacleSports.RuleService.Models.Helpers;
 using PinnacleSports.RuleService.RuleServices;
 using PinnacleSports.Shared.RuleEngineFactory.Interfaces;
 
 namespace PinnacleSports.RuleService.Models.CreditDeposit
 {
-    [ExternalMethod(typeof(CustomerRuleService), "IsPassedMonthlyLimit")]
+    [ExternalMethod(typeof(Helper), "Count")]
+    [Data("roles", typeof(Helper), "GetRoles")]
+	[ExternalMethod(typeof(CustomerRuleService), "IsPassedMonthlyLimit")]
     public class CreditCardDepositModel
     {
         internal readonly IRuleEngineFactory RuleEngineFactory;
@@ -14,6 +18,8 @@ namespace PinnacleSports.RuleService.Models.CreditDeposit
         {
             RuleEngineFactory = ruleEngineFactory;
         }
+
+        public ClientModel Client { get; set; }
 
         public CustomerModel Customer { get; set; }
         public CreditCardModel CreditCard { get; set; }

@@ -16,7 +16,7 @@ namespace RuleEngineCodeEffectsSandbox.Services
             _creditCardDepositRepository = creditCardDepositRepository;
         }
 
-        public List<MenuItem> LoadRulesMenuItems(Type modelType)
+        private List<MenuItem> LoadRulesMenuItems(Type modelType)
         {
             var rules = _creditCardDepositRepository.GetAllRules(modelType);
 
@@ -27,8 +27,7 @@ namespace RuleEngineCodeEffectsSandbox.Services
         public List<MenuItem> GetAllRules(Type modelType)
         {
             var rules = LoadRulesMenuItems(modelType);
-            rules.Sort((mi1, mi2) => string.Compare(mi1.DisplayName, mi2.DisplayName, StringComparison.Ordinal));
-            return rules;
+            return rules.OrderBy(x => x.DisplayName).ToList();
         }
 
         public void SaveRule(string ruleId, string ruleXml, bool isEval)

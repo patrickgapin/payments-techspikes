@@ -34,6 +34,10 @@
       <HintPath>..\packages\CodeEffects.Rule.4.3.0.2\lib\net40\CodeEffects.Rule.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SimpleInjector, Version=3.2.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.3.2.0\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,8 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Helper.cs" />
+    <Compile Include="Helpers\AfricaClientHelper.cs" />
+    <Compile Include="Helpers\NorthAmericaClientHelper.cs" />
+    <Compile Include="Helpers\IClientHelper.cs" />
+    <Compile Include="Helpers\SimpleInjectorInitializer.cs" />
     <Compile Include="Models\CreditDeposit\CreditCardDepositModel.cs" />
     <Compile Include="Models\CreditDeposit\CreditCardModel.cs" />
+    <Compile Include="Models\CreditDeposit\Client.cs" />
     <Compile Include="Models\CreditDeposit\CustomerModel.cs" />
     <Compile Include="Models\CreditDeposit\DepositTransactionModel.cs" />
     <Compile Include="Models\Notification\NotificationModel.cs" />
