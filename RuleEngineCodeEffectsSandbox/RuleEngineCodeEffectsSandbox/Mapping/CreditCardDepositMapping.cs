@@ -12,11 +12,9 @@ namespace RuleEngineCodeEffectsSandbox.Mapping
     public class CreditCardDepositMapping : ICreditCardDepositMapping
     {
         private readonly IRuleEngineFactory _ruleEngineFactory;
-        private readonly ICreditCardRepository _creditCardRepository; 
-	private readonly ICustomerRuleService _customerRuleService;
+        private readonly ICreditCardRepository _creditCardRepository;
 
-        public CreditCardDepositMapping(IRuleEngineFactory ruleEngineFactory, ICustomerRuleService customerRuleService,
-            ICreditCardRepository creditCardRepository)
+        public CreditCardDepositMapping(IRuleEngineFactory ruleEngineFactory, ICreditCardRepository creditCardRepository)       
         {
             _creditCardRepository = creditCardRepository;
             _ruleEngineFactory = ruleEngineFactory;
