@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using CodeEffects.Rule.Attributes;
 using PinnacleSports.RuleService.Models.Notification;
-using PinnacleSports.RuleService.Repository;
-using PinnacleSports.RuleService.RuleServices.Interfaces;
+using PinnacleSports.RuleService.RuleServices;
+using PinnacleSports.Shared.RuleEngineFactory.Interfaces;
 
 namespace PinnacleSports.RuleService.Models.CreditDeposit
 {
+    [ExternalMethod(typeof(CustomerRuleService), "IsPassedMonthlyLimit")]
     public class CreditCardDepositModel
     {
-        private readonly ICustomerRuleService _customerRuleService;
-        public CreditCardDepositModel(ICustomerRuleService customerRuleService)
+        internal readonly IRuleEngineFactory RuleEngineFactory;
+        public CreditCardDepositModel(IRuleEngineFactory ruleEngineFactory)
         {
-            _customerRuleService = customerRuleService;
+            RuleEngineFactory = ruleEngineFactory;
         }
 
         public CustomerModel Customer { get; set; }
@@ -24,12 +25,6 @@ namespace PinnacleSports.RuleService.Models.CreditDeposit
         
         public bool IsValid { get; set; }
 
-        [Method("Is Passed Monthly Limit", "Call External API to Check if Customer is Passed Monthly Limit.")]
-        public bool IsPassedMonthlyLimit(double monthlyLimit)
-        {
-            return _customerRuleService.IsPassedMonthlyLimit(Customer.CustomerId, DepositTransaction.Amount, monthlyLimit);
-        }
-        
         [Action("Set is Invalid", "Result that will be returned as Invalid.")]
         public void IsInvalid(string returnMessage)
         {

@@ -1,22 +1,23 @@
 ﻿using System.Linq;
 using CodeEffects.Rule.Attributes;
+using PinnacleSports.RuleService.Models.CreditDeposit;
 using PinnacleSports.RuleService.Repository;
 using PinnacleSports.RuleService.RuleServices.Interfaces;
+using PinnacleSports.Shared.RuleEngineFactory;
 
 namespace PinnacleSports.RuleService.RuleServices
 {
     public class CustomerRuleService : ICustomerRuleService
     {
-        private readonly IDepositTransactionRepository _depositTransactionRepository;
-
-        public CustomerRuleService(IDepositTransactionRepository depositTransactionRepository)
+        [Method("Is Passed Monthly Limit", "Call External API to Check if Customer is Passed Monthly Limit.")]
+        public bool IsPassedMonthlyLimit(CreditCardDepositModel creditCardDepositModel, double monthlyLimit)
         {
-            _depositTransactionRepository = depositTransactionRepository;
-        }
-
-        public bool IsPassedMonthlyLimit(int customerId, double amount, double monthlyLimit)
-        {
-            return amount + _depositTransactionRepository.GetDepositTransactionList(customerId).Sum(model => model.Amount) > monthlyLimit;
+            return creditCardDepositModel.DepositTransaction.Amount + 
+                creditCardDepositModel
+                .RuleEngineFactory
+                .CreateNew<IDepositTransactionRepository>(RuleEngineTypes.ImplementationType.DepositTransactionRepository)
+                .GetDepositTransactionList(creditCardDepositModel.Customer.CustomerId)
+                .Sum(model => model.Amount) > monthlyLimit;
         }
     }
 }

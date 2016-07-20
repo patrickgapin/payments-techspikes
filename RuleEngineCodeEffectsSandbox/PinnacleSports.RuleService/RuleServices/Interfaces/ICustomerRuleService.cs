@@ -1,7 +1,9 @@
-﻿namespace PinnacleSports.RuleService.RuleServices.Interfaces
+﻿using PinnacleSports.RuleService.Models.CreditDeposit;
+
+namespace PinnacleSports.RuleService.RuleServices.Interfaces
 {
     public interface ICustomerRuleService
     {
-        bool IsPassedMonthlyLimit(int customerId, double amount, double monthlyLimit);
+        bool IsPassedMonthlyLimit(CreditCardDepositModel creditCardDepositModel, double monthlyLimit);
     }
 }

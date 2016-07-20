@@ -7,6 +7,8 @@ using PinnacleSports.RuleRepo.Repository.Interfaces;
 using PinnacleSports.RuleService.Repository;
 using PinnacleSports.RuleService.RuleServices;
 using PinnacleSports.RuleService.RuleServices.Interfaces;
+using PinnacleSports.Shared.RuleEngineFactory;
+using PinnacleSports.Shared.RuleEngineFactory.Interfaces;
 using RuleEngineCodeEffectsSandbox.Mapping;
 using RuleEngineCodeEffectsSandbox.Mapping.Interfaces;
 using RuleEngineCodeEffectsSandbox.RuleEngine;
@@ -43,15 +45,17 @@ namespace RuleEngineCodeEffectsSandbox.Ioc
         {
             container.Register<IRuleService, RuleService>();
 
-            container.Register<ICustomerRuleService, CustomerRuleService>();
             container.Register<ICreditCardRepository, CreditCardRepository>();
-
             container.Register<IDepositTransactionRepository, DepositTransactionRepository>();
 
             container.Register<ICreditCardDepositRepository, CreditCardDepositRepository>();
             container.Register<ICreditCardDepositMapping, CreditCardDepositMapping>();
 
             container.Register<IRuleEngineEvaluator, RuleEngineEvaluator>();
+            
+            var ruleEngineFactory = new RuleEngineFactory(container);
+            ruleEngineFactory.Register<IDepositTransactionRepository, DepositTransactionRepository>(RuleEngineTypes.ImplementationType.DepositTransactionRepository);
+            container.RegisterSingleton<IRuleEngineFactory>(ruleEngineFactory);
 
             HttpContextBase httpContextBase = new HttpContextWrapper(HttpContext.Current);
             container.RegisterPerWebRequest(() => httpContextBase);

@@ -9,6 +9,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinnacleSports.RuleService"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinnacleSports.RuleRepo", "PinnacleSports.RuleRepo\PinnacleSports.RuleRepo.csproj", "{8EC5977F-202D-4895-BE73-0E907109B8BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinnacleSports.Shared", "PinnacleSports.Shared\PinnacleSports.Shared.csproj", "{1DE16BD5-82AA-4A02-9041-A5F3F0FC2AD5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RuleService", "RuleService", "{A2F8FB9C-6464-441A-8ACF-BF044DEA1166}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{4FAFA23B-E2BE-4229-B50B-A4CF64B575CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{632E402E-6A59-4317-9E1C-FCE1349CC9AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinnacleSports.RuleServiceTest", "PinnacleSports.RuleServiceTest\PinnacleSports.RuleServiceTest.csproj", "{6CE112AB-DE97-47D9-815E-380E05C352F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +37,22 @@ Global
 		{8EC5977F-202D-4895-BE73-0E907109B8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EC5977F-202D-4895-BE73-0E907109B8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EC5977F-202D-4895-BE73-0E907109B8BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DE16BD5-82AA-4A02-9041-A5F3F0FC2AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DE16BD5-82AA-4A02-9041-A5F3F0FC2AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DE16BD5-82AA-4A02-9041-A5F3F0FC2AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DE16BD5-82AA-4A02-9041-A5F3F0FC2AD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CE112AB-DE97-47D9-815E-380E05C352F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CE112AB-DE97-47D9-815E-380E05C352F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CE112AB-DE97-47D9-815E-380E05C352F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CE112AB-DE97-47D9-815E-380E05C352F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{89A47ADA-D74E-476F-9304-C313207AC167} = {A2F8FB9C-6464-441A-8ACF-BF044DEA1166}
+		{8EC5977F-202D-4895-BE73-0E907109B8BF} = {4FAFA23B-E2BE-4229-B50B-A4CF64B575CB}
+		{1DE16BD5-82AA-4A02-9041-A5F3F0FC2AD5} = {632E402E-6A59-4317-9E1C-FCE1349CC9AB}
+		{6CE112AB-DE97-47D9-815E-380E05C352F2} = {A2F8FB9C-6464-441A-8ACF-BF044DEA1166}
 	EndGlobalSection
 EndGlobal

@@ -3,7 +3,7 @@ using AutoMapper;
 using PinnacleSports.RuleRepo.Repository.Interfaces;
 using PinnacleSports.RuleService.Models.CreditDeposit;
 using PinnacleSports.RuleService.Models.Notification;
-using PinnacleSports.RuleService.RuleServices.Interfaces;
+using PinnacleSports.Shared.RuleEngineFactory.Interfaces;
 using RuleEngineCodeEffectsSandbox.Dto;
 using RuleEngineCodeEffectsSandbox.Mapping.Interfaces;
 
@@ -11,14 +11,14 @@ namespace RuleEngineCodeEffectsSandbox.Mapping
 {
     public class CreditCardDepositMapping : ICreditCardDepositMapping
     {
-        private readonly ICustomerRuleService _customerRuleService;
+        private readonly IRuleEngineFactory _ruleEngineFactory;
         private readonly ICreditCardRepository _creditCardRepository; 
 
-        public CreditCardDepositMapping(ICustomerRuleService customerRuleService, 
+        public CreditCardDepositMapping(IRuleEngineFactory ruleEngineFactory, 
             ICreditCardRepository creditCardRepository)
         {
-            _customerRuleService = customerRuleService;
             _creditCardRepository = creditCardRepository;
+            _ruleEngineFactory = ruleEngineFactory;
         }
 
         public IMapper GetMapper()
@@ -27,7 +27,7 @@ namespace RuleEngineCodeEffectsSandbox.Mapping
             {
                 cfg.CreateMap<CreditCardDepositDto, CreditCardDepositModel>()
                     .ConstructUsing(
-                        dto => new CreditCardDepositModel(_customerRuleService)
+                        dto => new CreditCardDepositModel(_ruleEngineFactory)
                         {
                             Customer = new CustomerModel()
                             {

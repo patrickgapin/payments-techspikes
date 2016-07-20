@@ -233,6 +233,10 @@
       <Project>{89a47ada-d74e-476f-9304-c313207ac167}</Project>
       <Name>PinnacleSports.RuleService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PinnacleSports.Shared\PinnacleSports.Shared.csproj">
+      <Project>{1de16bd5-82aa-4a02-9041-a5f3f0fc2ad5}</Project>
+      <Name>PinnacleSports.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
