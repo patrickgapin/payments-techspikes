@@ -9,8 +9,6 @@ namespace PinnacleSports.RuleService.Models.Helpers
 {
     public class Helper
     {
-        private IClientHelper clientHelper;
-
         [Method(DisplayName = "Count")]
         public int Count<T>(List<T> list)
         {
@@ -21,11 +19,6 @@ namespace PinnacleSports.RuleService.Models.Helpers
         {
             RuleInjectorInitializer.Initialize();
         }
-
-        //public Helper(IClientHelper clientHelper)
-        //{
-        //    this.clientHelper = clientHelper;
-        //}
 
         public List<DataSourceItem> GetRoles()
         {
